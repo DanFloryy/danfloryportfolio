@@ -699,12 +699,11 @@
         </div>
 
         <p class="helper-text">
-          Completá el formulario y después hacé clic en “Enviar mensaje por mail”.
-          Se abre tu correo con todo listo para mandarme tu idea.
+          Copiá el correo y escribime desde Gmail, Outlook u otro servicio de mail.
         </p>
       </div>
 
-      <form class="contact-form" id="contactForm">
+      <form class="contact-form">
         <div class="field-row">
           <div class="field">
             <label for="nombre">Nombre</label>
@@ -737,12 +736,12 @@
           <label for="detalles">Contame tu idea</label>
           <textarea id="detalles" name="detalles" rows="3" placeholder="Tema, tamaño, si lo querés digital o físico, plazos, referencias, etc."></textarea>
           <div class="helper-text">
-            Cuanta más info me des acá, mejor puedo responderte con algo ajustado a lo que buscás.
+            Este formulario es de muestra. Podés usarlo como guía para lo que la gente debería contarte.
           </div>
         </div>
 
-        <button class="btn-primary" type="button" onclick="enviarPorMail()">
-          Enviar mensaje por mail
+        <button class="btn-primary" type="button">
+          Formulario de muestra (no envía)
         </button>
       </form>
     </section>
@@ -787,27 +786,6 @@
         localStorage.setItem(THEME_KEY, next);
       });
     })();
-
-    function enviarPorMail() {
-      const nombre = document.getElementById('nombre').value || '';
-      const correo = document.getElementById('correo').value || '';
-      const tipo = document.getElementById('tipo').value || '';
-      const presupuesto = document.getElementById('presupuesto').value || '';
-      const detalles = document.getElementById('detalles').value || '';
-
-      let cuerpo = 'Nombre: ' + nombre + '%0D%0A';
-      cuerpo += 'Correo: ' + correo + '%0D%0A';
-      cuerpo += 'Qué busca: ' + tipo + '%0D%0A';
-      cuerpo += 'Presupuesto aprox.: ' + presupuesto + '%0D%0A%0D%0A';
-      cuerpo += 'Detalles de la idea:%0D%0A' + detalles;
-
-      const asunto = 'Nuevo encargo de ilustración - desde la web';
-      const mailto = 'mailto:pedritopzk1234@gmail.com'
-        + '?subject=' + encodeURIComponent(asunto)
-        + '&body=' + cuerpo;
-
-      window.location.href = mailto;
-    }
   </script>
 </body>
 </html>

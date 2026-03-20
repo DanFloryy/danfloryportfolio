@@ -700,7 +700,7 @@
 
         <p class="helper-text">
           Completá el formulario y después hacé clic en “Enviar mensaje por mail”.
-          Se abre tu correo con todo listo para mandarme tu idea.
+          Se abre Gmail en otra pestaña con todo listo para mandarme tu idea.
         </p>
       </div>
 
@@ -795,18 +795,20 @@
       const presupuesto = document.getElementById('presupuesto').value || '';
       const detalles = document.getElementById('detalles').value || '';
 
-      let cuerpo = 'Nombre: ' + nombre + '%0D%0A';
-      cuerpo += 'Correo: ' + correo + '%0D%0A';
-      cuerpo += 'Qué busca: ' + tipo + '%0D%0A';
-      cuerpo += 'Presupuesto aprox.: ' + presupuesto + '%0D%0A%0D%0A';
-      cuerpo += 'Detalles de la idea:%0D%0A' + detalles;
+      let cuerpo = 'Nombre: ' + nombre + '\n';
+      cuerpo += 'Correo: ' + correo + '\n';
+      cuerpo += 'Qué busca: ' + tipo + '\n';
+      cuerpo += 'Presupuesto aprox.: ' + presupuesto + '\n\n';
+      cuerpo += 'Detalles de la idea:\n' + detalles;
 
       const asunto = 'Nuevo encargo de ilustración - desde la web';
-      const mailto = 'mailto:pedritopzk1234@gmail.com'
-        + '?subject=' + encodeURIComponent(asunto)
-        + '&body=' + cuerpo;
 
-      window.location.href = mailto;
+      const url = 'https://mail.google.com/mail/?view=cm'
+        + '&to=' + encodeURIComponent('pedritopzk1234@gmail.com')
+        + '&su=' + encodeURIComponent(asunto)
+        + '&body=' + encodeURIComponent(cuerpo);
+
+      window.open(url, '_blank');
     }
   </script>
 </body>

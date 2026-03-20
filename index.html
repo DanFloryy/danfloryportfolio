@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dan Flory · Arte & Encargos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg-color: #f5f5f5;
+      --bg-alt: #ffffff;
+      --text-color: #1f2933;
+      --muted-text: #6b7280;
+      --accent-color: #ff6f61;
+      --accent-soft: #ffe1dc;
+      --border-subtle: #d1d5db;
+      --card-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #111827;
+      --bg-alt: #020617;
+      --text-color: #f9fafb;
+      --muted-text: #9ca3af;
+      --accent-color: #fb7185;
+      --accent-soft: #4b5563;
+      --border-subtle: #374151;
+      --card-shadow: 0 18px 45px rgba(0, 0, 0, 0.7);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(245, 245, 245, 0.9);
+      border-bottom: 1px solid var(--border-subtle);
+      backdrop-filter: blur(14px);
+    }
+
+    [data-theme="dark"] header {
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 0.9rem;
+      background: linear-gradient(135deg, #ff9f43, #ff6f61, #6366f1);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.35);
+    }
+
+    .brand-text h1 {
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-text span {
+      font-size: 0.8rem;
+      color: var(--muted-text);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.8rem;
+      font-size: 0.9rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      color: var(--muted-text);
+      transition: all 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      border-color: var(--border-subtle);
+      color: var(--text-color);
+      background-color: rgba(148, 163, 184, 0.15);
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-alt);
+      cursor: pointer;
+      font-size: 0.78rem;
+      color: var(--muted-text);
+      box-shadow: var(--card-shadow);
+    }
+
+    .theme-toggle span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.3rem;
+      height: 1.3rem;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.25);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.6rem 1rem 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .hero {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: minmax(0, 3fr);
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        grid-template-columns: minmax(0, 3fr) minmax(0, 2.3fr);
+        align-items: center;
+      }
+    }
+
+    .hero-text h2 {
+      font-size: clamp(2rem, 4vw, 2.7rem);
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-text h2 span {
+      color: var(--accent-color);
+    }
+
+    .hero-text p {
+      max-width: 32rem;
+      color: var(--muted-text);
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .tag-pill {
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      background: var(--accent-soft);
+      color: var(--accent-color);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    .btn-primary {
+      padding: 0.6rem 1.1rem;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, var(--accent-color), #ff8a73);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      box-shadow: 0 14px 30px rgba(248, 113, 113, 0.4);
+      transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease;
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+      box-shadow: 0 18px 36px rgba(248, 113, 113, 0.48);
+    }
+
+    .btn-ghost {
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: transparent;
+      color: var(--text-color);
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(148, 163, 184, 0.18);
+      border-color: var(--accent-color);
+      color: var(--accent-color);
+    }
+
+    .hero-visual {
+      position: relative;
+      max-width: 360px;
+      justify-self: center;
+    }
+
+    .hero-avatar {
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      border: 1px solid var(--border-subtle);
+      background: #000;
+    }
+
+    .hero-avatar img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .hero-badge {
+      position: absolute;
+      right: -10px;
+      bottom: -10px;
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      background: var(--bg-alt);
+      box-shadow: var(--card-shadow);
+      border: 1px solid var(--border-subtle);
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--muted-text);
+    }
+
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.3);
+    }
+
+    .ig-highlight {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border-subtle);
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+      box-shadow: var(--card-shadow);
+      color: var(--muted-text);
+    }
+
+    .ig-highlight span.icon {
+      font-size: 1rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .section-header h3 {
+      font-size: 1.1rem;
+    }
+
+    .section-header p {
+      font-size: 0.9rem;
+      color: var(--muted-text);
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      justify-content: center;
+    }
+
+    .gallery-item {
+      flex: 1 1 calc(50% - 0.9rem);
+      max-width: 260px;
+      background: var(--bg-alt);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 45px rgba(15, 23, 42, 0.4);
+      border-color: var(--accent-color);
+    }
+
+    .gallery-thumb {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+    }
+
+    .gallery-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-item:hover .gallery-thumb img {
+      transform: scale(1.05);
+    }
+
+    .gallery-info {
+      padding: 0.6rem 0.75rem 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .gallery-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .gallery-meta {
+      font-size: 0.8rem;
+      color: var(--muted-text);
+    }
+
+    @media (min-width: 768px) {
+      .gallery-item {
+        flex: 1 1 calc(25% - 0.9rem);
+        max-width: none;
+      }
+    }
+
+    .social {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .social-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted-text);
+    }
+
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .social-chip {
+      padding: 0.4rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      background: var(--bg-alt);
+      border: 1px solid var(--border-subtle);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      box-shadow: var(--card-shadow);
+      color: var(--muted-text);
+    }
+
+    .social-chip span.icon {
+      font-size: 1rem;
+    }
+
+    .contact {
+      background: var(--bg-alt);
+      border-radius: 20px;
+      padding: 1.4rem 1.3rem;
+      box-shadow: var(--card-shadow);
+      border: 1px solid var(--border-subtle);
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: minmax(0, 3fr);
+    }
+
+    @media (min-width: 768px) {
+      .contact {
+        grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+        align-items: center;
+      }
+    }
+
+    .contact h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .contact p {
+      font-size: 0.9rem;
+      color: var(--muted-text);
+      margin-bottom: 0.8rem;
+    }
+
+    .contact-data {
+      font-size: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .contact-data span.label {
+      font-weight: 600;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .field-row {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .field {
+      flex: 1 1 160px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      font-size: 0.8rem;
+    }
+
+    .field label {
+      color: var(--muted-text);
+    }
+
+    .field input,
+    .field textarea,
+    .field select {
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      padding: 0.4rem 0.6rem;
+      font: inherit;
+      background: transparent;
+      color: var(--text-color);
+      resize: vertical;
+      min-height: 2.1rem;
+    }
+
+    .helper-text {
+      font-size: 0.7rem;
+      color: var(--muted-text);
+    }
+
+    footer {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 1rem 1.5rem;
+      font-size: 0.75rem;
+      color: var(--muted-text);
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 600px) {
+      .nav {
+        flex-wrap: wrap;
+      }
+      .nav-links {
+        flex: 1 1 100%;
+        justify-content: center;
+      }
+      .hero-actions {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .hero-visual {
+        max-width: 100%;
+      }
+      footer {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav">
+      <div class="brand">
+        <div class="brand-logo"></div>
+        <div class="brand-text">
+          <h1>Dan Flory</h1>
+          <span>Arte tradicional & digital</span>
+        </div>
+      </div>
+
+      <div class="nav-links">
+        <a href="#portfolio">Trabajos</a>
+        <a href="#contacto">Contrataciones</a>
+        <a href="#redes">Instagram</a>
+      </div>
+
+      <button id="themeToggle" class="theme-toggle" type="button">
+        <span id="themeIcon" aria-hidden="true">🌙</span>
+        <span id="themeLabel">Oscuro</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-text">
+        <div class="ig-highlight">
+          <span class="icon">📸</span>
+          <span>Seguí mi trabajo en</span>
+          <a href="https://www.instagram.com/danflory.art" target="_blank" style="font-weight:600;">
+            @danflory.art
+          </a>
+        </div>
+
+        <h2>
+          Ilustración y dibujo tradicional para contar tus <span>historias</span>.
+        </h2>
+        <p>
+          Soy Dan Flory, artista independiente. Trabajo tanto en digital como en papel:
+          retratos, fanarts, originales y piezas por encargo para personas y proyectos.
+        </p>
+
+        <div class="hero-tags">
+          <span class="tag-pill">Disponible para encargos</span>
+          <span class="tag-pill">Digital & tradicional</span>
+          <span class="tag-pill">@danflory.art</span>
+        </div>
+
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">
+            Hablamos de tu proyecto →
+          </button>
+          <button class="btn-ghost" type="button" onclick="window.open('https://www.instagram.com/danflory.art','_blank')">
+            Ver más trabajos en Instagram
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-avatar">
+          <img
+            src="https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&w=800"
+            alt="Obras destacadas de Dan Flory"
+          />
+        </div>
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          <span>+50 obras realizadas</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="redes" class="social">
+      <div class="social-title">Instagram del artista</div>
+      <div class="social-links">
+        <a href="https://www.instagram.com/danflory.art" target="_blank" class="social-chip">
+          <span class="icon">📸</span>
+          <span>@danflory.art</span>
+        </a>
+        <div class="social-chip">
+          <span class="icon">✉️</span>
+          <span>pedritopzk1234@gmail.com</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio">
+      <div class="section-header">
+        <h3>Trabajos seleccionados</h3>
+        <p>Algunas piezas representativas. Podés ver más procesos y obras en Instagram.</p>
+      </div>
+
+      <div class="gallery">
+        <article class="gallery-item">
+          <div class="gallery-thumb">
+            <img src="https://images.pexels.com/photos/2837009/pexels-photo-2837009.jpeg?auto=compress&cs=tinysrgb&w=800"
+              alt="Retrato ilustrado de Dan Flory">
+          </div>
+          <div class="gallery-info">
+            <h4 class="gallery-title">Retrato de fantasía</h4>
+            <p class="gallery-meta">Encargo · técnica mixta</p>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <div class="gallery-thumb">
+            <img src="https://images.pexels.com/photos/322207/pexels-photo-322207.jpeg?auto=compress&cs=tinysrgb&w=800"
+              alt="Paisaje ilustrado de Dan Flory">
+          </div>
+          <div class="gallery-info">
+            <h4 class="gallery-title">Paisaje onírico</h4>
+            <p class="gallery-meta">Proyecto personal</p>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <div class="gallery-thumb">
+            <img src="https://images.pexels.com/photos/1053687/pexels-photo-1053687.jpeg?auto=compress&cs=tinysrgb&w=800"
+              alt="Diseño de personaje de Dan Flory">
+          </div>
+          <div class="gallery-info">
+            <h4 class="gallery-title">Diseño de personaje</h4>
+            <p class="gallery-meta">Estudio de personaje</p>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <div class="gallery-thumb">
+            <img src="https://images.pexels.com/photos/1037993/pexels-photo-1037993.jpeg?auto=compress&cs=tinysrgb&w=800"
+              alt="Ilustración abstracta de Dan Flory">
+          </div>
+          <div class="gallery-info">
+            <h4 class="gallery-title">Serie experimental</h4>
+            <p class="gallery-meta">Exploración de color</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contacto" class="contact">
+      <div>
+        <h3>Trabajemos juntos</h3>
+        <p>
+          Si querés una ilustración o dibujo hecho especialmente para vos o tu proyecto,
+          escribime con una idea general y te respondo con tiempos y presupuesto.
+        </p>
+
+        <div class="contact-data">
+          <div><span class="label">Email:</span> pedritopzk1234@gmail.com</div>
+          <div><span class="label">Instagram:</span> @danflory.art</div>
+          <div><span class="label">Ubicación:</span> Buenos Aires, Argentina</div>
+        </div>
+
+        <p class="helper-text">
+          Copiá el correo y escribime desde Gmail, Outlook u otro servicio de mail.
+        </p>
+      </div>
+
+      <form class="contact-form">
+        <div class="field-row">
+          <div class="field">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="nombre" type="text" placeholder="Tu nombre" />
+          </div>
+          <div class="field">
+            <label for="correo">Correo</label>
+            <input id="correo" name="correo" type="email" placeholder="tunombre@mail.com" />
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="tipo">Qué estás buscando</label>
+            <select id="tipo" name="tipo">
+              <option>Retrato</option>
+              <option>Fanart</option>
+              <option>Ilustración original</option>
+              <option>Dibujo físico</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="presupuesto">Presupuesto aproximado</label>
+            <input id="presupuesto" name="presupuesto" type="text" placeholder="Ej: USD 80" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="detalles">Contame tu idea</label>
+          <textarea id="detalles" name="detalles" rows="3" placeholder="Tema, tamaño, si lo querés digital o físico, plazos, referencias, etc."></textarea>
+          <div class="helper-text">
+            Este formulario es de muestra. Podés usarlo como guía para lo que la gente debería contarte.
+          </div>
+        </div>
+
+        <button class="btn-primary" type="button">
+          Formulario de muestra (no envía)
+        </button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 · Dan Flory</span>
+    <span>Portfolio creado para futuros encargos y colaboraciones</span>
+  </footer>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const toggleBtn = document.getElementById("themeToggle");
+      const icon = document.getElementById("themeIcon");
+      const label = document.getElementById("themeLabel");
+      const THEME_KEY = "portfolio-theme";
+
+      function applyTheme(theme) {
+        if (theme === "dark") {
+          root.setAttribute("data-theme", "dark");
+          icon.textContent = "☀️";
+          label.textContent = "Claro";
+        } else {
+          root.setAttribute("data-theme", "light");
+          icon.textContent = "🌙";
+          label.textContent = "Oscuro";
+        }
+      }
+
+      const storedTheme = localStorage.getItem(THEME_KEY);
+      if (storedTheme === "dark" || storedTheme === "light") {
+        applyTheme(storedTheme);
+      } else {
+        applyTheme("light");
+      }
+
+      toggleBtn.addEventListener("click", () => {
+        const current = root.getAttribute("data-theme") || "light";
+        const next = current === "dark" ? "light" : "dark";
+        applyTheme(next);
+        localStorage.setItem(THEME_KEY, next);
+      });
+    })();
+  </script>
+</body>
+</html>

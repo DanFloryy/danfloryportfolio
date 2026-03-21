@@ -385,13 +385,6 @@
       color: var(--muted-text);
     }
 
-    @media (min-width: 768px) {
-      .gallery-item {
-        flex: 1 1 calc(25% - 0.9rem);
-        max-width: none;
-      }
-    }
-
     .social {
       display: flex;
       flex-direction: column;
@@ -523,6 +516,59 @@
       flex-wrap: wrap;
     }
 
+    .community-section {
+      background: var(--bg-alt);
+      border-radius: 20px;
+      padding: 1.4rem 1.3rem;
+      box-shadow: var(--card-shadow);
+      border: 1px solid var(--border-subtle);
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: minmax(0, 3fr);
+      margin-top: 1.5rem;
+    }
+
+    .community-info {
+      font-size: 0.9rem;
+      color: var(--muted-text);
+    }
+
+    .community-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      justify-content: center;
+    }
+
+    .community-item {
+      flex: 1 1 calc(50% - 0.9rem);
+      max-width: 260px;
+      background: var(--bg-alt);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .community-item-body {
+      padding: 0.6rem 0.75rem 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      font-size: 0.85rem;
+    }
+
+    .pill-small {
+      display: inline-block;
+      padding: 0.1rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      background: var(--accent-soft);
+      color: var(--accent-color);
+    }
+
     @media (max-width: 600px) {
       .nav {
         flex-wrap: wrap;
@@ -556,9 +602,9 @@
       </div>
 
       <div class="nav-links">
-        <a href="#portfolio">Trabajos</a>
+        <a href="#portfolio">Mis trabajos</a>
+        <a href="#comunidad">Comunidad</a>
         <a href="#contacto">Contrataciones</a>
-        <a href="#redes">Instagram</a>
       </div>
 
       <button id="themeToggle" class="theme-toggle" type="button">
@@ -617,27 +663,14 @@
       </div>
     </section>
 
-    <section id="redes" class="social">
-      <div class="social-title">Instagram del artista</div>
-      <div class="social-links">
-        <a href="https://www.instagram.com/danflory.art" target="_blank" class="social-chip">
-          <span class="icon">📸</span>
-          <span>@danflory.art</span>
-        </a>
-        <div class="social-chip">
-          <span class="icon">✉️</span>
-          <span>pedritopzk1234@gmail.com</span>
-        </div>
-      </div>
-    </section>
-
     <section id="portfolio">
       <div class="section-header">
-        <h3>Trabajos seleccionados</h3>
-        <p>Algunas piezas representativas. Podés ver más procesos y obras en Instagram.</p>
+        <h3>Mis últimos dibujos</h3>
+        <p>Algunas piezas propias recientes. Podés ver más procesos y obras en Instagram.</p>
       </div>
 
       <div class="gallery">
+        <!-- Dibujo 1 -->
         <article class="gallery-item">
           <div class="gallery-thumb">
             <img src="https://images.pexels.com/photos/2837009/pexels-photo-2837009.jpeg?auto=compress&cs=tinysrgb&w=800"
@@ -649,6 +682,7 @@
           </div>
         </article>
 
+        <!-- Dibujo 2 -->
         <article class="gallery-item">
           <div class="gallery-thumb">
             <img src="https://images.pexels.com/photos/322207/pexels-photo-322207.jpeg?auto=compress&cs=tinysrgb&w=800"
@@ -660,6 +694,7 @@
           </div>
         </article>
 
+        <!-- Dibujo 3 -->
         <article class="gallery-item">
           <div class="gallery-thumb">
             <img src="https://images.pexels.com/photos/1053687/pexels-photo-1053687.jpeg?auto=compress&cs=tinysrgb&w=800"
@@ -671,6 +706,7 @@
           </div>
         </article>
 
+        <!-- Dibujo 4 -->
         <article class="gallery-item">
           <div class="gallery-thumb">
             <img src="https://images.pexels.com/photos/1037993/pexels-photo-1037993.jpeg?auto=compress&cs=tinysrgb&w=800"
@@ -682,6 +718,51 @@
           </div>
         </article>
       </div>
+
+      <section id="comunidad" class="community-section">
+        <div>
+          <div class="section-header">
+            <h3>Comunidad de dibujantes</h3>
+          </div>
+          <p class="community-info">
+            Quiero que esta página sea también un espacio para que otras personas muestren sus dibujos.
+            Podés subir tus propias creaciones y, cada tanto, voy a ir eligiendo algunas para destacarlas acá.
+          </p>
+          <p class="community-info" style="margin-top:0.5rem;">
+            Al hacer clic en el botón de abajo, vas a un formulario externo (Google Forms) donde podés subir tus dibujos y contar un poco sobre vos.
+          </p>
+          <button class="btn-primary" type="button"
+            onclick="window.open('https://forms.gle/LFx75uMaiuxLqtY16', '_blank')">
+            Subir mi dibujo a la comunidad
+          </button>
+          <p class="helper-text" style="margin-top:0.5rem;">
+            Tip: en el formulario podés pedir nombre, @ de Instagram, una breve descripción y adjuntar el archivo de la ilustración.
+          </p>
+        </div>
+
+        <div>
+          <p class="community-info" style="margin-bottom:0.6rem;">
+            Algunas piezas de la comunidad (curadas por mí):
+          </p>
+          <div class="community-list">
+            <!-- Ejemplo inicial de item de comunidad -->
+            <article class="community-item">
+              <div class="gallery-thumb">
+                <img src="https://images.pexels.com/photos/4475924/pexels-photo-4475924.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  alt="Ilustración de la comunidad de dibujantes">
+              </div>
+              <div class="community-item-body">
+                <span class="pill-small">Comunidad</span>
+                <strong>Autora / autor: @ejemplo</strong>
+                <span>“Título del dibujo o pequeña descripción.”</span>
+              </div>
+            </article>
+          </div>
+          <p class="helper-text" style="margin-top:0.5rem;">
+            Cada tanto voy a ir actualizando esta sección con nuevos trabajos que envíe la comunidad.
+          </p>
+        </div>
+      </section>
     </section>
 
     <section id="contacto" class="contact">
@@ -750,7 +831,7 @@
 
   <footer>
     <span>© 2026 · Dan Flory</span>
-    <span>Portfolio creado para futuros encargos y colaboraciones</span>
+    <span>Portfolio y comunidad de dibujantes</span>
   </footer>
 
   <script>
